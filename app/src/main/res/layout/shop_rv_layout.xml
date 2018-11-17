@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="3dp">
+
+    <View
+        android:layout_width="8dp"
+        android:layout_height="150dp"
+        android:id="@+id/colorView"
+        android:background="@color/md_green_500"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="233dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Week 1's Grocery List"
+            android:textAlignment="textStart"
+            android:textColor="@color/md_grey_700"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/singleItem"
+            android:layout_width="233dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="Safola Masala Oats"
+            android:textAlignment="textStart"
+            android:textColor="@color/md_grey_700"
+            android:textSize="16sp" />
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="21/03"
+            android:textAlignment="textStart"
+            android:textColor="@color/md_grey_700"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:visibility="gone"
+            android:layout_marginTop="100dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="21/03"
+            android:textAlignment="textStart"
+            android:textColor="@color/md_grey_700"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.v7.widget.CardView>

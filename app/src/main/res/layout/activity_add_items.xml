@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".AddItems">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp">
+
+
+
+            <ImageButton
+                android:layout_width="340dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_add"
+                android:id="@+id/itemImg"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemTitleTv"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/googlesans_regular"
+                android:hint="Item name" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/itemQuantityTv"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/googlesans_regular"
+                android:hint="Quantity"
+                android:padding="10dp"
+                />
+
+
+
+
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:text="upload"
+        android:textColor="@color/white"
+        android:fontFamily="@font/googlesans_bold"
+        android:textSize="20sp"
+        android:layout_gravity="bottom"
+        android:id="@+id/uploadBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
