@@ -139,14 +139,15 @@ public class UpdateShopList extends AppCompatActivity {
          uItems.setText(item);
          if (color.contains("Blue")){
 
-             mBackground.setBackgroundColor(Color.BLUE);
+             mBackground.setBackgroundResource(R.color.md_blue_200);
+
          } else if (color.contains("Green")){
-             mBackground.setBackgroundColor(Color.GREEN);
+             mBackground.setBackgroundResource(R.color.md_green_200);
          } else if(color.contains("Red")){
-             mBackground.setBackgroundColor(Color.RED);
+             mBackground.setBackgroundResource(R.color.md_red_200);
          } else if (color.contains("Black")) {
 
-             mBackground.setBackgroundColor(Color.GRAY);
+             mBackground.setBackgroundResource(R.color.md_blue_grey_200);
          }
 
 
