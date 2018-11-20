@@ -80,25 +80,39 @@ public class UpdateShopList extends AppCompatActivity {
                         switch (id){
 
                             case R.id.blue:
-                                COLOR = item.getTitle().toString();
-                                Toast.makeText(UpdateShopList.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+                            //    COLOR = item.getTitle().toString();
+                                color = item.getTitle().toString();
+                                mBackground.setBackgroundResource(R.color.md_blue_200);
+                                colorview.setBackgroundResource(R.color.md_blue_200);
 
                             case R.id.green:
-                                COLOR = item.getTitle().toString();
+                              //  COLOR = item.getTitle().toString();
+                                color = item.getTitle().toString();
 
-                                Toast.makeText(UpdateShopList.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                colorview.setBackgroundResource(R.color.md_green_200);
+                                mBackground.setBackgroundResource(R.color.md_green_200);
+
+
+
 
                             case R.id.red:
-                                COLOR = item.getTitle().toString();
+                              //  COLOR = item.getTitle().toString();
+                                color = item.getTitle().toString();
+
+                                mBackground.setBackgroundResource(R.color.md_red_200);
+
+                                colorview.setBackgroundResource(R.color.md_red_200);
 
 
-                                Toast.makeText(UpdateShopList.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
 
                             case R.id.black:
-                                COLOR = item.getTitle().toString();
+                              //  COLOR = item.getTitle().toString();
+                                color = item.getTitle().toString();
 
-                                Toast.makeText(UpdateShopList.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
 
+                                mBackground.setBackgroundResource(R.color.md_blue_grey_200);
+
+                                colorview.setBackgroundResource(R.color.md_blue_grey_200);
 
 
 
@@ -138,7 +152,6 @@ public class UpdateShopList extends AppCompatActivity {
          uTitle.setText(title);
          uItems.setText(item);
          if (color.contains("Blue")){
-
              mBackground.setBackgroundResource(R.color.md_blue_200);
 
          } else if (color.contains("Green")){
@@ -173,12 +186,19 @@ public class UpdateShopList extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                realmHelper = new RealmHelper(realm);
-                realmHelper.update(id,uTitle.getText().toString(),uItems.getText().toString(),COLOR,date,time);
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        realmHelper = new RealmHelper(realm);
+                        realmHelper.update(id,uTitle.getText().toString(),uItems.getText().toString(),color,date,time);
 
-                Toast.makeText(UpdateShopList.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateShopList.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
 
-                finish();
+                        finish();
+                    }
+                });
+
+
 
             }
         });
@@ -190,16 +210,23 @@ public class UpdateShopList extends AppCompatActivity {
 
     private void deleteItem() {
 
-        realmHelper = new RealmHelper(realm);
-        realmHelper.delete(id,uTitle.getText().toString(),uItems.getText().toString(),color,date,time);
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realmHelper = new RealmHelper(realm);
+                realmHelper.delete(id,uTitle.getText().toString(),uItems.getText().toString(),color,date,time);
 
-        Toast.makeText(UpdateShopList.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateShopList.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
 
 
-        uTitle.setText("");
-        uItems.setText("");
+                uTitle.setText("");
+                uItems.setText("");
 
-        startActivity(new Intent(UpdateShopList.this,ShopListActivity.class));
+                startActivity(new Intent(UpdateShopList.this,ShopListActivity.class));
+
+            }
+        });
+
 
 
     }

@@ -59,9 +59,7 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
 
             colorview.setBackgroundResource(R.color.md_green_200);
         } else if (shoppingModel.getColor().equals("Red")){
-            colorview.setBackgroundColor(Color.RED);
-            colorview.getResources().getColor(R.color.md_red_200);
-
+            colorview.setBackgroundResource(R.color.md_red_200);
 
         } else if (shoppingModel.getColor().equals("Blue")){
             colorview.setBackgroundResource(R.color.md_blue_200);

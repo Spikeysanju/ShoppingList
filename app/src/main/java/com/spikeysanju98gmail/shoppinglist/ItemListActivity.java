@@ -3,6 +3,7 @@ package com.spikeysanju98gmail.shoppinglist;
 import android.content.Context;
 import android.content.Intent;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,11 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.UUID;
+
 
 public class ItemListActivity extends AppCompatActivity {
 
     private RecyclerView mItemRV;
-    private DatabaseReference mItemDB,mtitleDB;
+    private DatabaseReference mItemDB,mtitleDB,recentDB;
     FirebaseRecyclerAdapter mItemAdapter;
     private FloatingActionButton addItemBtn;
     private ImageButton addItemtoList,removeFromList;
@@ -45,6 +50,8 @@ public class ItemListActivity extends AppCompatActivity {
         mItemRV = (RecyclerView)findViewById(R.id.itemRV);
         mItemDB = FirebaseDatabase.getInstance().getReference().child("Items");
         mtitleDB = FirebaseDatabase.getInstance().getReference().child("Todolist");
+        recentDB = FirebaseDatabase.getInstance().getReference().child("RecentItems");
+
         itemListName = (TextView)findViewById(R.id.itemListName);
 
 
@@ -117,13 +124,37 @@ public class ItemListActivity extends AppCompatActivity {
                 viewHolder.setQuantity(model.getQuantity());
                 viewHolder.setImage(ItemListActivity.this,model.getImage());
                 addItemtoList = (ImageButton)viewHolder.mView.findViewById(R.id.addtoList);
-                removeFromList = (ImageButton)viewHolder.mView.findViewById(R.id.deletefromlist);
+
+                //add item to the list
                 addItemtoList.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        addtoRecent(mItemAdapter.getRef(position).getKey());
+
+
+                        Item item = new Item(
+                                model.getItem(),
+                                model.getMenuID(),
+                                model.getImage(),
+                                model.getQuantity()
+
+
+                        );
+
+                        final String RandomUID = UUID.randomUUID().toString();
+
+                        recentDB.child(RandomUID).setValue(item).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(ItemListActivity.this, "Item Added To Recent", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+
                     }
                 });
+                removeFromList = (ImageButton)viewHolder.mView.findViewById(R.id.deletefromlist);
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -141,9 +172,9 @@ public class ItemListActivity extends AppCompatActivity {
         mItemRV.setAdapter(mItemAdapter);
     }
 
-    private void addtoRecent(String key) {
 
-    }
+
+
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
 
