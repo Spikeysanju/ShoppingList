@@ -3,8 +3,11 @@ package com.spikeysanju98gmail.shoppinglist;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,16 +17,22 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.spikeysanju98gmail.shoppinglist.adapter.TaskAdapter;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.RealmHelper;
+import com.spikeysanju98gmail.shoppinglist.realmmodels.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class UpdateShopList extends AppCompatActivity {
 
     private EditText uTitle,uItems;
     private ImageButton updateBtn,deleteBtn,searchBtn;
-
+    private EditText enterItemEd,enterQuantityEd;
     private RealmHelper realmHelper;
     private Realm realm;
     private String title;
@@ -34,6 +43,10 @@ public class UpdateShopList extends AppCompatActivity {
     private int id;
     private RelativeLayout mBackground;
     private String COLOR = "";
+    private FloatingActionButton addButton;
+    private RecyclerView taskRV;
+    private TaskAdapter adapter;
+    List<Task> taskList;
 
 
     private View colorview;
@@ -45,8 +58,37 @@ public class UpdateShopList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_shop_list);
 
+
+        // Setting Up RecyclerView
+        taskRV = (RecyclerView)findViewById(R.id.taskRV);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        taskRV.setLayoutManager(layoutManager);
+
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+
+        taskList = new ArrayList<>();
+
+        taskList = getAllTaskList(id);
+        adapter = new TaskAdapter(this,taskList);
+        taskRV.setAdapter(adapter);
+
+
+
         updateBtn = (ImageButton) findViewById(R.id.updateList);
         searchBtn = (ImageButton)findViewById(R.id.searchItem);
+
+        enterItemEd = (EditText)findViewById(R.id.enterItemEd);
+        enterQuantityEd = (EditText)findViewById(R.id.enterQuantityEd);
+        addButton = (FloatingActionButton) findViewById(R.id.addButton);
+
+
+
+
+
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,8 +190,15 @@ public class UpdateShopList extends AppCompatActivity {
          time = getIntent().getStringExtra("time");
 
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItems(id,query);
+            }
+        });
 
          uTitle.setText(title);
+      //  uTitle.setText(String.valueOf(id));
          uItems.setText(item);
          if (color.contains("Blue")){
              mBackground.setBackgroundResource(R.color.md_blue_200);
@@ -165,7 +214,6 @@ public class UpdateShopList extends AppCompatActivity {
 
 
 
-        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
 
         realm = Realm.getInstance(configuration);
 
@@ -206,6 +254,51 @@ public class UpdateShopList extends AppCompatActivity {
     }
 
 
+    String query = String.valueOf(id);
+
+
+    private void addItems(int id,String query) {
+
+        String item = enterItemEd.getText().toString();
+        String quantity = enterQuantityEd.getText().toString();
+
+        if (!item.isEmpty() && !quantity.isEmpty()) {
+
+            final Task task = new Task();
+            task.setItem(item);
+            task.setListID(id);
+            task.setLid(query);
+            task.setQuantity(quantity);
+
+
+            realmHelper = new RealmHelper(realm);
+
+            realmHelper.saveTask(task);
+
+            Toast.makeText(this, "Item Added Successfully", Toast.LENGTH_SHORT).show();
+
+
+            enterItemEd.setText("");
+            enterQuantityEd.setText("");
+
+
+        }
+    }
+
+
+    // added query to filter the list by id
+
+
+    public List<Task> getAllTaskList(int id){
+
+
+        RealmResults<Task> taskResults = realm.where(Task.class)
+                .findAll();
+
+        return taskResults;
+
+    }
+
 
 
     private void deleteItem() {
@@ -229,5 +322,12 @@ public class UpdateShopList extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.notifyDataSetChanged();
     }
 }

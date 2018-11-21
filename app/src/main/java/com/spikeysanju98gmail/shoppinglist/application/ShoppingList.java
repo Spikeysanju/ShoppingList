@@ -15,6 +15,7 @@ public class ShoppingList extends Application {
         Realm.init(this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("shopping.db")
+                .deleteRealmIfMigrationNeeded()
                 .schemaVersion(0)
                 .build();
 

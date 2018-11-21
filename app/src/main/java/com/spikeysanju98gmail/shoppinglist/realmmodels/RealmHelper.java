@@ -53,24 +53,50 @@ public class RealmHelper {
 
     public List<ShoppingModel> getAllShoppingList(){
 
-
-
-
-
-
-
-
         RealmResults<ShoppingModel> shopResult = realm.where(ShoppingModel.class).findAll();
-
-
-
 
 
         return shopResult;
     }
 
+   // save items to realm
+    public void saveTask(final Task task){
 
-    //update data to realm
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                if (realm!=null){
+
+                    Log.e("Log", "Database was created  " );
+
+
+                    Number currentID = realm.where(Task.class).max("id");
+                    int nextId;
+                    if (currentID == null){
+
+                        nextId=1;
+
+                    } else {
+                        nextId = currentID.intValue() + 1;
+                    }
+
+
+                    task.setId(nextId);
+
+
+                    Task s = realm.copyToRealm(task);
+                } else {
+                    Log.e("Log", "Database not exits " );
+                }
+            }
+        });
+    }
+
+
+
+
+
+
 
     public void update(final int id, final String title, final String items, final String color, final String date, final String time){
 

@@ -42,8 +42,9 @@
             android:layout_marginTop="122dp"
             android:fontFamily="@font/googlesans_regular"
             android:hint="Enter new task"
-
             />
+
+
 
 
 

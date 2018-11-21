@@ -47,7 +47,62 @@
             />
 
 
+
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="207dp"
+        android:id="@+id/linearTask"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/enterItemEd"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@id/listItems"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:hint="Enter new items"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/enterQuantityEd"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@id/listItems"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:hint="Quantity"
+            android:textSize="16sp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/addButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom|end"
+            app:backgroundTint="@color/black"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_add" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/taskRV"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/linearTask"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 

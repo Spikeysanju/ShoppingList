@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.spikeysanju98gmail.shoppinglist.realmmodels.RealmHelper;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.ShoppingModel;
+import com.spikeysanju98gmail.shoppinglist.realmmodels.Task;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -68,28 +69,9 @@ public class AddShopListActivity extends AppCompatActivity {
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
 
-//        insertBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getValues();
-//            }
-//        });
-
-
-
-
-
-
-//        showBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                startActivity(new Intent(AddShopListActivity.this,ShopListActivity.class));
-//
-//            }
-//        });
-
     }
+
+
 
     private void chooseColor() {
 
@@ -141,14 +123,9 @@ public class AddShopListActivity extends AppCompatActivity {
         String items = edItems.getText().toString();
 
 
-
-
-
-
         if (!title.isEmpty() && !items.isEmpty() && !COLOR.isEmpty() && !date.isEmpty() && !time.isEmpty()){
 
             ShoppingModel shoppingModel = new ShoppingModel();
-
 
 
 
@@ -159,12 +136,9 @@ public class AddShopListActivity extends AppCompatActivity {
             shoppingModel.setTime(time);
 
 
-
-
             realmHelper =new RealmHelper(realm);
 
             realmHelper.save(shoppingModel);
-
 
             Toast.makeText(this, "List Created Successfully", Toast.LENGTH_SHORT).show();
 

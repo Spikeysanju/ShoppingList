@@ -16,7 +16,6 @@ public class ShoppingModel extends RealmObject {
     private String  time;
 
 
-
     public int getId() {
         return id;
     }
