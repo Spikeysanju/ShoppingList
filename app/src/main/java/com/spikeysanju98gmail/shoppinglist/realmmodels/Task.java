@@ -10,15 +10,7 @@ public class Task extends RealmObject {
     private String item;
     private String quantity;
     private int listID;
-    private String lid;
 
-    public String getLid() {
-        return lid;
-    }
-
-    public void setLid(String lid) {
-        this.lid = lid;
-    }
 
     public int getId() {
         return id;

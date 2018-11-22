@@ -57,18 +57,18 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
 
         if (shoppingModel.getColor().equals("Green")){
 
-            colorview.setBackgroundResource(R.color.md_green_200);
+            colorview.setBackgroundResource(R.color.md_green_400);
         } else if (shoppingModel.getColor().equals("Red")){
-            colorview.setBackgroundResource(R.color.md_red_200);
+            colorview.setBackgroundResource(R.color.md_red_400);
 
         } else if (shoppingModel.getColor().equals("Blue")){
-            colorview.setBackgroundResource(R.color.md_blue_200);
+            colorview.setBackgroundResource(R.color.md_blue_400);
 
         } else if (shoppingModel.getColor().equals("Black")){
-            colorview.setBackgroundResource(R.color.md_blue_grey_200);
+            colorview.setBackgroundResource(R.color.md_blue_grey_400);
 
         } else {
-            colorview.setBackgroundResource(R.color.md_yellow_200);
+            colorview.setBackgroundResource(R.color.md_yellow_400);
         }
 
 
@@ -137,17 +137,4 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
         }
     }
 
-
-
-    private String convertCodeToStatus(String status) {
-        if (status.equals("0")){
-            return "Waiting";
-
-        } else if (status.equals("1")){
-            return "Permitted";
-
-        } else {
-            return "Adopted";
-        }
-    }
 }

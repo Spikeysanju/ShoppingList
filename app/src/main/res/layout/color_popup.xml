@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="170dp"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Color"
+        android:textColor="@color/black"
+        android:id="@+id/selectUIColor"
+        android:padding="10dp"
+        android:fontFamily="@font/googlesans_medium"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/selectUIColor"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:id="@+id/linearcolor1"
+        android:layout_height="wrap_content">
+
+
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_Green"
+            android:backgroundTint="@color/md_green_500"
+            android:layout_height="40dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_yellow"
+            android:backgroundTint="@color/md_yellow_500"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_red"
+            android:backgroundTint="@color/md_red_400"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_blue"
+            android:backgroundTint="@color/md_blue_500"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_violet"
+            android:backgroundTint="@color/md_purple_200"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_below="@id/linearcolor1">
+
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_orange"
+            android:backgroundTint="@color/md_orange_300"
+            android:layout_height="40dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_grey"
+            android:backgroundTint="@color/md_grey_500"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_brown"
+            android:backgroundTint="@color/md_brown_400"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+        <View
+            android:layout_width="40dp"
+            android:id="@+id/view_primary"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

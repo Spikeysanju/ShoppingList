@@ -26,6 +26,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class UpdateShopList extends AppCompatActivity {
@@ -58,23 +59,6 @@ public class UpdateShopList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_shop_list);
 
-
-        // Setting Up RecyclerView
-        taskRV = (RecyclerView)findViewById(R.id.taskRV);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        taskRV.setLayoutManager(layoutManager);
-
-        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
-        realm = Realm.getInstance(configuration);
-
-        realmHelper = new RealmHelper(realm);
-
-        taskList = new ArrayList<>();
-
-        taskList = getAllTaskList(id);
-        adapter = new TaskAdapter(this,taskList);
-        taskRV.setAdapter(adapter);
 
 
 
@@ -190,6 +174,26 @@ public class UpdateShopList extends AppCompatActivity {
          time = getIntent().getStringExtra("time");
 
 
+        // Setting Up RecyclerView
+        taskRV = (RecyclerView)findViewById(R.id.taskRV);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        taskRV.setLayoutManager(layoutManager);
+
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+
+        taskList = new ArrayList<>();
+
+        taskList = getAllTaskList(id);
+        adapter = new TaskAdapter(this,taskList);
+        taskRV.setAdapter(adapter);
+
+
+
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,7 +271,6 @@ public class UpdateShopList extends AppCompatActivity {
             final Task task = new Task();
             task.setItem(item);
             task.setListID(id);
-            task.setLid(query);
             task.setQuantity(quantity);
 
 
@@ -293,6 +296,7 @@ public class UpdateShopList extends AppCompatActivity {
 
 
         RealmResults<Task> taskResults = realm.where(Task.class)
+                .equalTo("listID", id)
                 .findAll();
 
         return taskResults;
@@ -307,6 +311,9 @@ public class UpdateShopList extends AppCompatActivity {
             @Override
             public void execute(Realm realm) {
                 realmHelper = new RealmHelper(realm);
+
+               deleteTaskAlso(id);
+
                 realmHelper.delete(id,uTitle.getText().toString(),uItems.getText().toString(),color,date,time);
 
                 Toast.makeText(UpdateShopList.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
@@ -320,6 +327,22 @@ public class UpdateShopList extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    private void deleteTaskAlso(final int id) {
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+
+                RealmResults<Task> deleteTask = realm.where(Task.class).equalTo("listID",id).findAll();
+
+                deleteTask.deleteAllFromRealm();
+            }
+        });
 
 
     }

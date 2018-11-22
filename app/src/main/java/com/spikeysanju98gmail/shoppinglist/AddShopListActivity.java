@@ -1,11 +1,20 @@
 package com.spikeysanju98gmail.shoppinglist;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -14,6 +23,9 @@ import android.widget.Toast;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.RealmHelper;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.ShoppingModel;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.Task;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -34,6 +46,7 @@ public class AddShopListActivity extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +56,15 @@ public class AddShopListActivity extends AppCompatActivity {
         edTitle = (EditText)findViewById(R.id.listTitle);
         edItems = (EditText)findViewById(R.id.listItems);
 
+        alarmBtn = (ImageButton)findViewById(R.id.alarmBtn);
+
+        alarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                chooseColorFromPallete();
+            }
+        });
 
         saveBtn = (ImageButton)findViewById(R.id.savelistBtn);
 
@@ -54,8 +76,11 @@ public class AddShopListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chooseColor();
+
             }
         });
+
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,18 +90,52 @@ public class AddShopListActivity extends AppCompatActivity {
         });
 
 
+
         //setting up realm
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
 
     }
 
+    //Color popup
+    private void chooseColorFromPallete() {
+
+        View green,yellow,red,blue,purple,orange,grey,brown,primary;
+        AlertDialog.Builder color_alert = new AlertDialog.Builder(AddShopListActivity.this);
+        color_alert.setCancelable(true);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.color_popup,null);
+
+        green = (View)view.findViewById(R.id.view_Green);
+        yellow = (View)view.findViewById(R.id.view_yellow);
+        red = (View)view.findViewById(R.id.view_red);
+        blue = (View)view.findViewById(R.id.view_blue);
+        purple = (View)view.findViewById(R.id.view_violet);
+        orange = (View)view.findViewById(R.id.view_orange);
+        grey = (View)view.findViewById(R.id.view_grey);
+        brown = (View)view.findViewById(R.id.view_brown);
+        primary = (View)view.findViewById(R.id.view_primary);
+
+
+
+
+        color_alert.setView(view);
+
+//        AlertDialog dialog_card = color_alert.create();
+//
+//        dialog_card.getWindow().setGravity(Gravity.BOTTOM);
+
+        color_alert.show();
+
+
+
+    }
 
 
     private void chooseColor() {
 
 
-        PopupMenu popupMenu = new PopupMenu(AddShopListActivity.this,colorBtn);
+        PopupMenu popupMenu = new PopupMenu(AddShopListActivity.this,colorBtn, Gravity.BOTTOM);
 
         popupMenu.getMenuInflater().inflate(R.menu.color_menu,popupMenu.getMenu());
         popupMenu.show();
@@ -123,7 +182,10 @@ public class AddShopListActivity extends AppCompatActivity {
         String items = edItems.getText().toString();
 
 
-        if (!title.isEmpty() && !items.isEmpty() && !COLOR.isEmpty() && !date.isEmpty() && !time.isEmpty()){
+        String mydate = DateFormat.getDateTimeInstance().format(new Date());
+
+
+        if (!title.isEmpty() && !items.isEmpty() && !COLOR.isEmpty() && !mydate.isEmpty() && !time.isEmpty()){
 
             ShoppingModel shoppingModel = new ShoppingModel();
 
@@ -132,7 +194,7 @@ public class AddShopListActivity extends AppCompatActivity {
             shoppingModel.setTitle(title);
             shoppingModel.setItems(items);
             shoppingModel.setColor(COLOR);
-            shoppingModel.setDate(date);
+            shoppingModel.setDate(mydate);
             shoppingModel.setTime(time);
 
 
