@@ -94,9 +94,46 @@ public class RealmHelper {
 
 
 
+    //update task list
+
+    public  void  updateTask(final int id, final boolean isDone){
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Task task = realm.where(Task.class).equalTo("id",id)
+                        .findFirst();
+                task.setDone(isDone);
+                realm.copyToRealmOrUpdate(task);
+            }
+        });
+
+
+    }
 
 
 
+
+    //update not done task list
+
+    public  void  updateNotTask(final int id, final boolean isDone){
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Task task = realm.where(Task.class).equalTo("id",id)
+                        .findFirst();
+                task.setDone(isDone);
+                realm.copyToRealmOrUpdate(task);
+            }
+        });
+
+
+    }
+
+
+
+    //update shopping list data
 
     public void update(final int id, final String title, final String items, final String color, final String date, final String time){
 
@@ -132,6 +169,7 @@ public class RealmHelper {
             }
         });
     }
+
 
 
     // delete from realm

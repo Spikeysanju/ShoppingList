@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -25,9 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -57,7 +54,7 @@ public class ItemCatalogFragment extends Fragment {
     private ImageButton addImage;
     private StorageReference mStorage;
     private Button uploadBtn;
-    Uri saveURI;
+    Uri saveuri;
     private static final int GALLERY_REQUEST = 22;
     View v;
     public ItemCatalogFragment() {
@@ -190,14 +187,14 @@ public class ItemCatalogFragment extends Fragment {
 
 
 
-        if (!TextUtils.isEmpty(title) && saveURI!=null){
+        if (!TextUtils.isEmpty(title) && saveuri !=null){
 
             String randomUID = UUID.randomUUID().toString();
 
 
-            StorageReference filepath = mStorage.child("Category_Images" + randomUID).child(saveURI.getLastPathSegment());
+            StorageReference filepath = mStorage.child("Category_Images" + randomUID).child(saveuri.getLastPathSegment());
 
-            filepath.putFile(saveURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            filepath.putFile(saveuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
@@ -287,9 +284,9 @@ public class ItemCatalogFragment extends Fragment {
 
 
 
-            saveURI= data.getData();
+            saveuri = data.getData();
 
-            CropImage.activity(saveURI)
+            CropImage.activity(saveuri)
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(1,1)
                     .start(getActivity());
@@ -300,7 +297,7 @@ public class ItemCatalogFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 addImage.setImageURI(resultUri);
-                saveURI = resultUri;
+                saveuri = resultUri;
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

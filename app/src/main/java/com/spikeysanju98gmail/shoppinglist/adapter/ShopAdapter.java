@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.spikeysanju98gmail.shoppinglist.R;
@@ -21,6 +23,7 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
 
     private List<ShoppingModel> shopList;
     View colorview;
+    LinearLayout shopCardColor;
 
     Context context;
 
@@ -54,21 +57,34 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
 
         colorview = (View)holder.itemView.findViewById(R.id.colorView);
 
+        shopCardColor = (LinearLayout) holder.itemView.findViewById(R.id.shopCardColor);
+
+
+
 
         if (shoppingModel.getColor().equals("Green")){
 
             colorview.setBackgroundResource(R.color.md_green_400);
+            shopCardColor.setBackgroundResource(R.color.md_green_50);
         } else if (shoppingModel.getColor().equals("Red")){
             colorview.setBackgroundResource(R.color.md_red_400);
+            shopCardColor.setBackgroundResource(R.color.md_red_50);
+
 
         } else if (shoppingModel.getColor().equals("Blue")){
             colorview.setBackgroundResource(R.color.md_blue_400);
+            shopCardColor.setBackgroundResource(R.color.md_blue_50);
+
 
         } else if (shoppingModel.getColor().equals("Black")){
             colorview.setBackgroundResource(R.color.md_blue_grey_400);
+            shopCardColor.setBackgroundResource(R.color.md_blue_grey_50);
+
 
         } else {
             colorview.setBackgroundResource(R.color.md_yellow_400);
+            shopCardColor.setBackgroundResource(R.color.md_yellow_50);
+
         }
 
 
@@ -89,6 +105,7 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
         TextView item;
         TextView color;
         View colorView;
+        LinearLayout shopCardColor;
 
 
 
@@ -101,6 +118,7 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
              time = itemView.findViewById(R.id.time);
              color = itemView.findViewById(R.id.color);
              colorView = itemView.findViewById(R.id.colorView);
+             shopCardColor = itemView.findViewById(R.id.shopCardColor);
 
              itemView.setOnLongClickListener(new View.OnLongClickListener() {
                  @Override

@@ -9,6 +9,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"
+        android:id="@+id/taskCheck"
         android:layout_marginStart="30dp"
         android:layout_height="wrap_content" />
 

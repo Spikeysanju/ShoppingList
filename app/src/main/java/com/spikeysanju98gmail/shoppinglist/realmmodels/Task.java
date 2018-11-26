@@ -10,7 +10,15 @@ public class Task extends RealmObject {
     private String item;
     private String quantity;
     private int listID;
+    private boolean isDone;
 
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 
     public int getId() {
         return id;

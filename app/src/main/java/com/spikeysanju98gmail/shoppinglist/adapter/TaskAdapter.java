@@ -2,20 +2,26 @@ package com.spikeysanju98gmail.shoppinglist.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spikeysanju98gmail.shoppinglist.R;
 import com.spikeysanju98gmail.shoppinglist.UpdateShopList;
+import com.spikeysanju98gmail.shoppinglist.realmmodels.RealmHelper;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.ShoppingModel;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.Task;
 
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>{
 
@@ -23,6 +29,9 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
     private List<Task> taskList;
 
     Context context;
+
+    RealmHelper realmHelper;
+    Realm realm;
 
     public TaskAdapter(Context context, List<Task> tasks){
 
@@ -42,8 +51,14 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
+
+
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
 
         final Task task = taskList.get(position);
 
@@ -56,12 +71,52 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
             }
         });
 
+        if (task.isDone()){
 
+            holder.item.setPaintFlags(holder.item.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.taskCheck.setChecked(true);
+
+
+        } else {
+
+            holder.item.setPaintFlags(holder.item.getPaintFlags() &( ~Paint.STRIKE_THRU_TEXT_FLAG));
+
+            holder.taskCheck.setChecked(false);
+        }
+
+
+
+
+        holder.taskCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (task.isDone()){
+
+
+                    realm.beginTransaction();
+                    realmHelper.updateTask(task.getId(),false);
+                    realm.commitTransaction();
+
+
+                } else {
+                    realm.beginTransaction();
+                    realmHelper.updateTask(task.getId(),true);
+                    realm.commitTransaction();
+                }
+
+
+
+
+
+
+
+            }
+        });
 
 
     }
-
-
 
 
     @Override
@@ -69,10 +124,11 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
         return taskList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView item;
         TextView quantity;
+        CheckBox taskCheck;
 
 
 
@@ -82,6 +138,7 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
 
             item = itemView.findViewById(R.id.items);
             quantity = itemView.findViewById(R.id.quantity);
+            taskCheck = itemView.findViewById(R.id.taskCheck);
 
 
              itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -93,7 +150,7 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
                  }
              });
 
-//             itemView.setOnClickListener(this);
+             itemView.setOnClickListener(this);
 
 
 
@@ -102,12 +159,13 @@ public class TaskAdapter extends  RecyclerView.Adapter<TaskAdapter.MyViewHolder>
 
         }
 
-//        @Override
-//        public void onClick(View v) {
-//
-//            Toast.makeText(context, "Helloooo", Toast.LENGTH_SHORT).show();
-//
-//        }
+
+        @Override
+        public void onClick(View v) {
+
+
+
+        }
     }
 
 

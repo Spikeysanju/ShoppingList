@@ -14,9 +14,17 @@
         android:id="@+id/colorView"
         android:background="@color/md_green_500"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:id="@+id/shopCardColor"
+
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
 
@@ -55,11 +63,13 @@
         android:orientation="horizontal"
         android:layout_height="match_parent">
 
+
+
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="100dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="21/03"
@@ -71,7 +81,7 @@
             android:id="@+id/color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="60dp"
             android:visibility="gone"
             android:layout_marginTop="100dp"
             android:fontFamily="@font/googlesans_regular"
@@ -83,6 +93,15 @@
 
     </LinearLayout>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_alignStart="@+id/shopCardColor"
+            android:src="@drawable/ic_alarm" />
+
+    </RelativeLayout>
 
 
 

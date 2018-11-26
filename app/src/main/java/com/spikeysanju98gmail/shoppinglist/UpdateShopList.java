@@ -271,6 +271,7 @@ public class UpdateShopList extends AppCompatActivity {
             final Task task = new Task();
             task.setItem(item);
             task.setListID(id);
+            task.setDone(false);
             task.setQuantity(quantity);
 
 
