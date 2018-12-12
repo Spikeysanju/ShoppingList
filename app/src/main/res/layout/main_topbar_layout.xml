@@ -18,13 +18,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-
-
-
-
                 <ImageView
-                    android:id="@+id/closeup"
+                    android:id="@+id/close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="7dp"
@@ -35,7 +30,7 @@
 
 
                 <ImageView
-                    android:id="@+id/logoupdate"
+                    android:id="@+id/logo"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:padding="10dp"
@@ -47,35 +42,38 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
+
                 <ImageButton
-                    android:id="@+id/searchItem"
+                    android:id="@+id/searchList"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@color/white"
                     android:src="@drawable/ic_search"
                     android:layout_alignParentRight="true"
-                    android:layout_marginEnd="120dp"
+                    android:layout_marginEnd="90dp"
                     android:layout_centerVertical="true"/>
+
                 <ImageButton
-                    android:id="@+id/updateList"
+                    android:id="@+id/sortBtn"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@color/white"
-                    android:src="@drawable/ic_save"
+                    android:src="@drawable/ic_sort"
                     android:layout_alignParentRight="true"
-                    android:layout_marginEnd="70dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_centerVertical="true"/>
 
-
                 <ImageButton
-                    android:id="@+id/deleteList"
+                    android:id="@+id/changeLayout"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@color/white"
-                    android:src="@drawable/ic_delete"
+                    android:src="@drawable/ic_grid"
                     android:layout_alignParentRight="true"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_centerVertical="true"/>
+
+
             </RelativeLayout>
 
 

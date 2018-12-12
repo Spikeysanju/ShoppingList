@@ -50,9 +50,13 @@ public class ShopAdapter  extends  RecyclerView.Adapter<ShopAdapter.MyViewHolder
 
         ShoppingModel shoppingModel = shopList.get(position);
 
+        String notModifiedDate = shoppingModel.getDate();
+        String modifiedDate = notModifiedDate.substring(0,notModifiedDate.length()-8);
         holder.title.setText(shoppingModel.getTitle());
         holder.item.setText(shoppingModel.getItems());
-        holder.time.setText(shoppingModel.getDate());
+       // holder.time.setText(shoppingModel.getDate());
+        holder.time.setText(modifiedDate);
+
         holder.color.setText(shoppingModel.getColor());
 
         colorview = (View)holder.itemView.findViewById(R.id.colorView);

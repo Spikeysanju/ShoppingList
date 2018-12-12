@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spikeysanju98gmail.shoppinglist.adapter.TaskAdapter;
@@ -47,6 +50,7 @@ public class UpdateShopList extends AppCompatActivity {
     private FloatingActionButton addButton;
     private RecyclerView taskRV;
     private TaskAdapter adapter;
+    private TextView dateView;
     List<Task> taskList;
 
 
@@ -68,6 +72,7 @@ public class UpdateShopList extends AppCompatActivity {
         enterItemEd = (EditText)findViewById(R.id.enterItemEd);
         enterQuantityEd = (EditText)findViewById(R.id.enterQuantityEd);
         addButton = (FloatingActionButton) findViewById(R.id.addButton);
+        dateView = (TextView)findViewById(R.id.dateView);
 
 
 
@@ -87,66 +92,68 @@ public class UpdateShopList extends AppCompatActivity {
 
         uTitle = (EditText)findViewById(R.id.uTitle);
         uItems = (EditText)findViewById(R.id.uItems);
-        colorview = (View)findViewById(R.id.colorBtn);
+        colorview = (View)findViewById(R.id.colorPopup);
 
         colorview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                PopupMenu popupMenu = new PopupMenu(UpdateShopList.this,colorview);
+                chooseColorFromPallete();
 
-                popupMenu.getMenuInflater().inflate(R.menu.color_menu,popupMenu.getMenu());
-                popupMenu.show();
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        int id = item.getItemId();
-
-                        switch (id){
-
-                            case R.id.blue:
-                            //    COLOR = item.getTitle().toString();
-                                color = item.getTitle().toString();
-                                mBackground.setBackgroundResource(R.color.md_blue_200);
-                                colorview.setBackgroundResource(R.color.md_blue_200);
-
-                            case R.id.green:
-                              //  COLOR = item.getTitle().toString();
-                                color = item.getTitle().toString();
-
-                                colorview.setBackgroundResource(R.color.md_green_200);
-                                mBackground.setBackgroundResource(R.color.md_green_200);
-
-
-
-
-                            case R.id.red:
-                              //  COLOR = item.getTitle().toString();
-                                color = item.getTitle().toString();
-
-                                mBackground.setBackgroundResource(R.color.md_red_200);
-
-                                colorview.setBackgroundResource(R.color.md_red_200);
-
-
-
-                            case R.id.black:
-                              //  COLOR = item.getTitle().toString();
-                                color = item.getTitle().toString();
-
-
-                                mBackground.setBackgroundResource(R.color.md_blue_grey_200);
-
-                                colorview.setBackgroundResource(R.color.md_blue_grey_200);
-
-
-
-
-                        }
-                        return false;
-                    }
-                });
+//                PopupMenu popupMenu = new PopupMenu(UpdateShopList.this,colorview);
+//
+//                popupMenu.getMenuInflater().inflate(R.menu.color_menu,popupMenu.getMenu());
+//                popupMenu.show();
+//
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        int id = item.getItemId();
+//
+//                        switch (id){
+//
+//                            case R.id.blue:
+//                            //    COLOR = item.getTitle().toString();
+//                                color = item.getTitle().toString();
+//                                mBackground.setBackgroundResource(R.color.md_blue_200);
+//                                colorview.setBackgroundResource(R.color.md_blue_200);
+//
+//                            case R.id.green:
+//                              //  COLOR = item.getTitle().toString();
+//                                color = item.getTitle().toString();
+//
+//                                colorview.setBackgroundResource(R.color.md_green_200);
+//                                mBackground.setBackgroundResource(R.color.md_green_200);
+//
+//
+//
+//
+//                            case R.id.red:
+//                              //  COLOR = item.getTitle().toString();
+//                                color = item.getTitle().toString();
+//
+//                                mBackground.setBackgroundResource(R.color.md_red_200);
+//
+//                                colorview.setBackgroundResource(R.color.md_red_200);
+//
+//
+//
+//                            case R.id.black:
+//                              //  COLOR = item.getTitle().toString();
+//                                color = item.getTitle().toString();
+//
+//
+//                                mBackground.setBackgroundResource(R.color.md_blue_grey_200);
+//
+//                                colorview.setBackgroundResource(R.color.md_blue_grey_200);
+//
+//
+//
+//
+//                        }
+//                        return false;
+//                    }
+//                });
 
             }
         });
@@ -172,6 +179,8 @@ public class UpdateShopList extends AppCompatActivity {
         item = getIntent().getStringExtra("item");
         date = getIntent().getStringExtra("date");
          time = getIntent().getStringExtra("time");
+
+         dateView.setText(date);
 
 
         // Setting Up RecyclerView
@@ -205,15 +214,22 @@ public class UpdateShopList extends AppCompatActivity {
       //  uTitle.setText(String.valueOf(id));
          uItems.setText(item);
          if (color.contains("Blue")){
-             mBackground.setBackgroundResource(R.color.md_blue_200);
+             mBackground.setBackgroundResource(R.color.md_blue_50);
+             colorview.setBackgroundResource(R.color.md_blue_200);
 
          } else if (color.contains("Green")){
-             mBackground.setBackgroundResource(R.color.md_green_200);
-         } else if(color.contains("Red")){
-             mBackground.setBackgroundResource(R.color.md_red_200);
-         } else if (color.contains("Black")) {
+             mBackground.setBackgroundResource(R.color.md_green_50);
+             colorview.setBackgroundResource(R.color.md_green_200);
 
-             mBackground.setBackgroundResource(R.color.md_blue_grey_200);
+
+         } else if(color.contains("Red")){
+             mBackground.setBackgroundResource(R.color.md_red_50);
+             colorview.setBackgroundResource(R.color.md_red_200);
+
+         } else if (color.contains("Yellow")) {
+             mBackground.setBackgroundResource(R.color.md_yellow_50);
+             colorview.setBackgroundResource(R.color.md_yellow_200);
+
          }
 
 
@@ -354,4 +370,75 @@ public class UpdateShopList extends AppCompatActivity {
         super.onRestart();
         adapter.notifyDataSetChanged();
     }
+
+
+    private void chooseColorFromPallete() {
+
+
+        final View green,yellow,red,blue,purple,orange,grey,brown,primary;
+        final AlertDialog.Builder builder = new AlertDialog.Builder(UpdateShopList.this);
+        builder.setCancelable(true);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.color_popup,null);
+        builder.setView(view);
+
+        green = (View)view.findViewById(R.id.view_Green);
+        yellow = (View)view.findViewById(R.id.view_yellow);
+        red = (View)view.findViewById(R.id.view_red);
+        blue = (View)view.findViewById(R.id.view_blue);
+        purple = (View)view.findViewById(R.id.view_violet);
+        orange = (View)view.findViewById(R.id.view_orange);
+        grey = (View)view.findViewById(R.id.view_grey);
+        brown = (View)view.findViewById(R.id.view_brown);
+        primary = (View)view.findViewById(R.id.view_primary);
+        final AlertDialog dialog = builder.create();
+
+        green.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                color = "Green";
+                mBackground.setBackgroundResource(R.color.md_green_50);
+                colorview.setBackgroundResource(R.color.md_green_50);
+                dialog.dismiss();
+            }
+        });
+
+        yellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color = "Yellow";
+                mBackground.setBackgroundResource(R.color.md_yellow_50);
+                colorview.setBackgroundResource(R.color.md_yellow_50);
+                dialog.dismiss();
+            }
+        });
+
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color = "Red";
+                mBackground.setBackgroundResource(R.color.md_red_50);
+                colorview.setBackgroundResource(R.color.md_red_50);
+                dialog.dismiss();
+            }
+        });
+
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                color = "Blue";
+                mBackground.setBackgroundResource(R.color.md_blue_50);
+                colorview.setBackgroundResource(R.color.md_blue_50);
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
 }

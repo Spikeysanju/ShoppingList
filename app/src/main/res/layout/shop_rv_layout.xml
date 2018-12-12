@@ -30,28 +30,28 @@
 
         <TextView
             android:id="@+id/itemTitle"
-            android:layout_width="233dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/googlesans_bold"
             android:text="Week 1's Grocery List"
             android:textAlignment="textStart"
-            android:textColor="@color/md_grey_700"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
 
         <TextView
             android:id="@+id/singleItem"
-            android:layout_width="233dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="Safola Masala Oats"
             android:textAlignment="textStart"
-            android:textColor="@color/md_grey_700"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
 
 
@@ -69,13 +69,13 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="115dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="21/03"
             android:textAlignment="textStart"
-            android:textColor="@color/md_grey_700"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/color"
@@ -83,12 +83,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:visibility="gone"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="110dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="21/03"
             android:textAlignment="textStart"
             android:textColor="@color/md_grey_700"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
 
     </LinearLayout>
@@ -96,8 +96,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignStart="@+id/shopCardColor"
             android:src="@drawable/ic_alarm" />
 

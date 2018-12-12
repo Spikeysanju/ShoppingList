@@ -5,14 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShopListActivity">
-
-
+<include layout="@layout/main_topbar_layout"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_marginTop="70dp"
+    android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/shopRV"
+        android:layout_margin="10dp"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
+
 
 
     <android.support.design.widget.FloatingActionButton
@@ -20,7 +27,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        app:backgroundTint="@color/black"
+        app:backgroundTint="@color/md_blue_500"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add" />
 

@@ -1,6 +1,5 @@
 package com.spikeysanju98gmail.shoppinglist;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -8,21 +7,14 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.spikeysanju98gmail.shoppinglist.realmmodels.RealmHelper;
 import com.spikeysanju98gmail.shoppinglist.realmmodels.ShoppingModel;
-import com.spikeysanju98gmail.shoppinglist.realmmodels.Task;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -38,7 +30,7 @@ public class AddShopListActivity extends AppCompatActivity {
     private ImageButton saveBtn,alarmBtn;
     private RealmHelper realmHelper;
 
-    private String COLOR = "";
+    private String COLOR = "Green";
     private String date = "10/11/18";
     private String time = "12.30 AM";
 
@@ -58,13 +50,13 @@ public class AddShopListActivity extends AppCompatActivity {
 
         alarmBtn = (ImageButton)findViewById(R.id.alarmBtn);
 
-        alarmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                chooseColorFromPallete();
-            }
-        });
+//        alarmBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                chooseColorFromPallete();
+//            }
+//        });
 
         saveBtn = (ImageButton)findViewById(R.id.savelistBtn);
 
@@ -75,7 +67,8 @@ public class AddShopListActivity extends AppCompatActivity {
         colorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseColor();
+                //chooseColor();
+                chooseColorFromPallete();
 
             }
         });
@@ -100,11 +93,13 @@ public class AddShopListActivity extends AppCompatActivity {
     //Color popup
     private void chooseColorFromPallete() {
 
-        View green,yellow,red,blue,purple,orange,grey,brown,primary;
-        AlertDialog.Builder color_alert = new AlertDialog.Builder(AddShopListActivity.this);
-        color_alert.setCancelable(true);
+
+        final View green,yellow,red,blue,purple,orange,grey,brown,primary;
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AddShopListActivity.this);
+        builder.setCancelable(true);
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.color_popup,null);
+        builder.setView(view);
 
         green = (View)view.findViewById(R.id.view_Green);
         yellow = (View)view.findViewById(R.id.view_yellow);
@@ -115,64 +110,89 @@ public class AddShopListActivity extends AppCompatActivity {
         grey = (View)view.findViewById(R.id.view_grey);
         brown = (View)view.findViewById(R.id.view_brown);
         primary = (View)view.findViewById(R.id.view_primary);
+        final AlertDialog dialog = builder.create();
 
-
-
-
-        color_alert.setView(view);
-
-//        AlertDialog dialog_card = color_alert.create();
-//
-//        dialog_card.getWindow().setGravity(Gravity.BOTTOM);
-
-        color_alert.show();
-
-
-
-    }
-
-
-    private void chooseColor() {
-
-
-        PopupMenu popupMenu = new PopupMenu(AddShopListActivity.this,colorBtn, Gravity.BOTTOM);
-
-        popupMenu.getMenuInflater().inflate(R.menu.color_menu,popupMenu.getMenu());
-        popupMenu.show();
-
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        green.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-
-                switch (id){
-
-                    case R.id.blue:
-                        COLOR = item.getTitle().toString();
-                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                    case R.id.green:
-                        COLOR = item.getTitle().toString();
-                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                    case R.id.red:
-                        COLOR = item.getTitle().toString();
-                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-                    case R.id.black:
-                        COLOR = item.getTitle().toString();
-                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
-
-
-
-
-
-                }
-                return false;
+            public void onClick(View view) {
+                COLOR = "Green";
+                dialog.dismiss();
             }
         });
 
+        yellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                COLOR = "Yellow";
+                dialog.dismiss();
+            }
+        });
+
+        red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                COLOR = "Red";
+                dialog.dismiss();
+            }
+        });
+
+        blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                COLOR = "Blue";
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+
+
     }
+
+
+//    private void chooseColor() {
+//
+//
+//        PopupMenu popupMenu = new PopupMenu(AddShopListActivity.this,colorBtn, Gravity.BOTTOM);
+//
+//        popupMenu.getMenuInflater().inflate(R.menu.color_menu,popupMenu.getMenu());
+//        popupMenu.show();
+//
+//        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                int id = item.getItemId();
+//
+//                switch (id){
+//
+//                    case R.id.blue:
+//                        COLOR = item.getTitle().toString();
+//                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+//
+//                    case R.id.green:
+//                        COLOR = item.getTitle().toString();
+//                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+//
+//                    case R.id.red:
+//                        COLOR = item.getTitle().toString();
+//                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+//
+//                    case R.id.black:
+//                        COLOR = item.getTitle().toString();
+//                        Toast.makeText(AddShopListActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//
+//                }
+//                return false;
+//            }
+//        });
+//
+//    }
 
 
     private void getValues() {
@@ -183,6 +203,7 @@ public class AddShopListActivity extends AppCompatActivity {
 
 
         String mydate = DateFormat.getDateTimeInstance().format(new Date());
+        String modifiedDate = mydate.substring(0,mydate.length()-8);
 
 
         if (!title.isEmpty() && !items.isEmpty() && !COLOR.isEmpty() && !mydate.isEmpty() && !time.isEmpty()){

@@ -13,10 +13,23 @@
     <include layout="@layout/top_tab_layout"
         android:id="@+id/topbar"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateView"
+        android:text="hello"
+        android:layout_below="@id/topbar"
+        android:layout_marginTop="55dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/googlesans_regular"
+        android:textColor="@color/md_grey_500"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_below="@id/dateView"
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true">
 
 
@@ -56,19 +69,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="207dp"
+        android:layout_marginTop="180dp"
+        android:padding="10dp"
         android:id="@+id/linearTask"
         android:orientation="horizontal"
         >
 
         <EditText
             android:id="@+id/enterItemEd"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_below="@id/listItems"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="30dp"
             android:fontFamily="@font/googlesans_regular"
             android:hint="Enter new items"
             android:textSize="16sp" />
@@ -99,6 +113,7 @@
         android:layout_width="match_parent"
         android:id="@+id/taskRV"
         android:layout_marginTop="10dp"
+        android:layout_margin="15dp"
         android:layout_below="@id/linearTask"
         android:layout_height="match_parent">
 
@@ -107,7 +122,7 @@
 
 
 
-    <include layout="@layout/bottom_task"/>
+    <include layout="@layout/bottom_task_update"/>
 
 
 </RelativeLayout>

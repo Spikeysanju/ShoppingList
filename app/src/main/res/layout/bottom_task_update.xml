@@ -11,10 +11,9 @@
     <View
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:id="@+id/colorBtn"
+        android:id="@+id/colorPopup"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
-        android:onClick="showPopup"
         android:backgroundTint="@color/md_green_500"
         android:background="@drawable/circle_layout"
         />
@@ -25,7 +24,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
-        android:id="@+id/alarmBtn"
+        android:id="@+id/alarmButton"
         android:background="@color/white"
         android:src="@drawable/ic_alarm"/>
 
